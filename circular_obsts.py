@@ -1,5 +1,5 @@
-import random
 import pygame
+import random
 from config import *
 from main import screen
 

@@ -13,9 +13,6 @@ def main():
     ticks = pygame.time.get_ticks()
     frames = 0
 
-    # Robot configuration
-    robot_list = []
-
     # Shared goal position
     goalX = np.array([600, 400])
 

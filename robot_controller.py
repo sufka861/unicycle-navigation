@@ -29,7 +29,7 @@ def calculate_movment(bot, robot_list, circ_x, circ_y, radius):
         obstX = np.array([circ_x[closest_obj], circ_y[closest_obj]])
         [v, omega] = bot.avoid_obst(obstX)
 
-    # Add avoidance of other robots here
+    # Avoid other robots
     min_distance = float('inf')  # Initialize to positive infinity
     for other_robot in robot_list:
         if other_robot is not bot:  # Avoid checking against itself
@@ -37,6 +37,6 @@ def calculate_movment(bot, robot_list, circ_x, circ_y, radius):
             if distance < min_distance:
                 min_distance = distance
                 other_robotX = [other_robot.x, other_robot.y]
-    if min_distance < skirt_r:  # If too close to another robot, use avoid_obst with the position of the other robot
+    if min_distance < skirt_r:  # If another robot within radius, use avoid_obst with the position of the other robot
         [v, omega] = bot.avoid_obst(other_robotX)
-    return[v, omega]
+    return [v, omega]
