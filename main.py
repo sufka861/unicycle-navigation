@@ -46,7 +46,7 @@ def main():
 
         # Check if obstacles are in sensor skirts of any robots
         for bot in robot_list:
-            [v, omega] = calculate_movment(bot, robot_list, circ_x, circ_y, radius)
+            [v, omega] = calculate_movement(bot, robot_list, circ_x, circ_y, radius)
 
             # Update robot position and orientation as per control input
             bot.update_position(v, omega)

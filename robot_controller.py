@@ -14,7 +14,8 @@ def create_robots(num_robots, data):
         robot_list.append(Robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data))
     return robot_list
 
-def calculate_movment(bot, robot_list, circ_x, circ_y, radius):
+
+def calculate_movement(bot, robot_list, circ_x, circ_y, radius):
     close_obst = []
     dist = []
     for i in range(num_circ_obsts):
