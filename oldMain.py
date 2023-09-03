@@ -50,7 +50,7 @@ def main():
         screen.fill((50, 55, 60))   # background
 
         # Draw robot, sensor skirt, obstacles and goal
-        bot = robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data)
+        bot = Robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data)
         pygame.draw.circle(screen, (100, 100, 100), (int(bot.x), int(bot.y)), skirt_r, 0)   # Draw sensor skirt
         draw_circular_obsts(radius, circ_x, circ_y)
         bot.show()    # Draw the robot

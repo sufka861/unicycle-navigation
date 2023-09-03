@@ -29,7 +29,7 @@ def main():
         robot_phi = random.uniform(0, 2 * np.pi)
         robot_l = 15
         robot_b = 6
-        robot_list.append(robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data))
+        robot_list.append(Robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data))
 
     # Shared goal position
     goalX = np.array([600, 400])
@@ -47,7 +47,7 @@ def main():
 
         # Draw robots, sensor skirts, obstacles, and goal
         for bot in robot_list:
-            bot = robot(bot.x, bot.y, bot.phi, bot.l, bot.b, data)
+            bot = Robot(bot.x, bot.y, bot.phi, bot.l, bot.b, data)
             pygame.draw.circle(screen, (100, 100, 100), (int(bot.x), int(bot.y)), skirt_r, 0)  # Draw sensor skirt
             bot.show()  # Draw the robot
         draw_circular_obsts(radius, circ_x, circ_y)
@@ -68,6 +68,17 @@ def main():
                 closest_obj = dist.index(min(dist))  # Index of the closest object
                 obstX = np.array([circ_x[closest_obj], circ_y[closest_obj]])
                 [v, omega] = bot.avoid_obst(obstX)
+
+            # Add avoidance of other robots here
+            min_distance = float('inf')  # Initialize to positive infinity
+            for other_robot in robot_list:
+                if other_robot is not bot:  # Avoid checking against itself
+                    distance = np.linalg.norm([bot.x - other_robot.x, bot.y - other_robot.y])
+                    if distance < min_distance:
+                        min_distance = distance
+                        other_robotX = [other_robot.x, other_robot.y]
+            if min_distance < skirt_r:  # If too close to another robot, use avoid_obst with the position of the other robot
+                [v, omega] = bot.avoid_obst(other_robotX)
 
             # Update robot position and orientation as per control input
             bot.update_position(v, omega)
