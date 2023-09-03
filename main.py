@@ -5,6 +5,7 @@ from config import *
 
 screen = pygame.display.set_mode([screen_width, screen_height], DOUBLEBUF)
 
+
 def main():
     # PyGame inits
     pygame.init()
@@ -25,8 +26,7 @@ def main():
     for _ in range(num_robots):
         robot_x = random.randint(50, screen_width - 50)
         robot_y = random.randint(50, screen_height - 50)
-        # robot_phi = random.uniform(0, 2 * np.pi)
-        robot_phi = 0
+        robot_phi = random.uniform(0, 2 * np.pi)
         robot_l = 15
         robot_b = 6
         robot_list.append(robot(robot_x, robot_y, robot_phi, robot_l, robot_b, data))
@@ -71,7 +71,6 @@ def main():
 
             # Update robot position and orientation as per control input
             bot.update_position(v, omega)
-
 
         # FPS. Print if required
         clock.tick(300)  # To limit FPS, controls the speed of the animation
