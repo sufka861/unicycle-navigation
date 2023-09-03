@@ -17,7 +17,12 @@ def main():
     goalX = np.array([600, 400])
 
     # Create and initialize robots
-    data = {"screen": screen, "goalX": goalX, "vmax": 0.5, "gtg_scaling": 0.0001, "K_p": 0.01, "ao_scaling": 0.00005}
+    data = {"screen": screen,
+            "goalX": goalX,
+            "vmax": vmax,
+            "gtg_scaling": gtg_scaling,
+            "K_p": K_p,
+            "ao_scaling": ao_scaling}
 
     # initialize robot_list
     robot_list = create_robots(num_robots, data)
