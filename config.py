@@ -2,7 +2,6 @@
 screen_width = 640
 screen_height = 480
 
-
 # Obstacles
 num_circ_obsts = 3
 obst_min_radius = 10

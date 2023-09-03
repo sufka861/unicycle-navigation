@@ -40,3 +40,5 @@ class robot:
         self.x += v * math.cos(self.phi)
         self.y += v * math.sin(self.phi)
         self.phi += omega
+        self.X = np.array([self.x, self.y])
+

@@ -1,12 +1,8 @@
-import numpy as np
-import pygame
 from pygame.locals import *
 from robot import *
-import random
 from circular_obsts import *
 from config import *
 
-# Screen
 screen = pygame.display.set_mode([screen_width, screen_height], DOUBLEBUF)
 
 def main():
@@ -73,12 +69,7 @@ def main():
                 obstX = np.array([circ_x[closest_obj], circ_y[closest_obj]])
                 [v, omega] = bot.avoid_obst(obstX)
 
-            # # Update robot position and orientation as per control input
-            # bot.x += v * math.cos(bot.phi)
-            # bot.y += v * math.sin(bot.phi)
-            # bot.phi += omega
-
-            # Update robot position and orientation
+            # Update robot position and orientation as per control input
             bot.update_position(v, omega)
 
 
