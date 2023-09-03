@@ -35,3 +35,8 @@ class robot:
         phi_d = -math.atan2(e[1], e[0]) # Desired heading
         omega = self.data["K_p"]*math.atan2(math.sin(phi_d - self.phi), math.cos(phi_d - self.phi))     # Only P part of a PID controller to give omega as per desired heading
         return [v, omega]
+
+    def update_position(self, v, omega):
+        self.x += v * math.cos(self.phi)
+        self.y += v * math.sin(self.phi)
+        self.phi += omega
