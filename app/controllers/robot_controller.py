@@ -23,7 +23,7 @@ def close_obst_count(bot, num_circ_obsts, circ_x, circ_y, radius):
         if distance <= (skirt_r + radius[i]):
             close_obst.append([circ_x[i], circ_y[i], radius[i]])
             dist.append(distance)
-    return (close_obst, dist)
+    return close_obst, dist
 
 
 def min_distance_from_other_robot(bot, robot_list):
@@ -31,11 +31,11 @@ def min_distance_from_other_robot(bot, robot_list):
     min_distance = float('inf')  # Initialize to positive infinity
     for other_robot in robot_list:
         if other_robot is not bot:  # Avoid checking against itself
-            distance = np.linalg.norm([bot.x - other_robot.x, bot.y - other_robot.y])
+            distance = math.sqrt((other_robot.x - bot.x) ** 2 + (other_robot.y - bot.y) ** 2)
             if distance < min_distance:
                 min_distance = distance
                 other_robotX = [other_robot.x, other_robot.y]
-    return (min_distance, other_robotX)
+    return min_distance, other_robotX
 
 
 def calculate_movement(bot, robot_list, circ_x, circ_y, radius):
@@ -50,6 +50,6 @@ def calculate_movement(bot, robot_list, circ_x, circ_y, radius):
 
     # Avoid other robots
     [min_distance, other_robotX] = min_distance_from_other_robot(bot,robot_list)
-    if min_distance < skirt_r:  # If another robot within radius, use avoid_obst with the position of the other robot
+    if min_distance < skirt_r * 2:  # If another robot within radius, use avoid_obst with the position of the other robot
         [v, omega] = bot.avoid_obst(other_robotX)
     return [v, omega]
