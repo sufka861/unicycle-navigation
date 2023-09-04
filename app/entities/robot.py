@@ -31,7 +31,7 @@ class Robot:
             phi_d - self.phi))  # Only P part of a PID controller to give omega as per desired heading
         return [v, omega]
 
-    def avoid_obst(self, obstX):
+    def avoid(self, obstX):
         e = obstX - self.X  # error in position
         K = self.data["vmax"] * (1 - np.exp(- self.data["ao_scaling"] * np.linalg.norm(e) ** 2)) / np.linalg.norm(
             e)  # Scaling for velocity

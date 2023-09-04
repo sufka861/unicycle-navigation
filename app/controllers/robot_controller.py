@@ -6,8 +6,8 @@ from app.entities.robot import *
 def create_robots(num_robots, data):
     robot_list = []
     for _ in range(num_robots):
-        robot_x = random.randint(50, screen_width - 50)
-        robot_y = random.randint(50, screen_height - 50)
+        robot_x = random.randint(0, screen_width)
+        robot_y = random.randint(0, screen_height)
         robot_phi = random.uniform(0, 2 * np.pi)
         robot_l = 15
         robot_b = 6
@@ -46,10 +46,10 @@ def calculate_movement(bot, robot_list, circ_x, circ_y, radius):
     else:
         closest_obj = dist.index(min(dist))  # Index of the closest object
         obstX = np.array([circ_x[closest_obj], circ_y[closest_obj]])
-        [v, omega] = bot.avoid_obst(obstX)
+        [v, omega] = bot.avoid(obstX)
 
     # Avoid other robots
     [min_distance, other_robotX] = min_distance_from_other_robot(bot,robot_list)
-    if min_distance < skirt_r * 2:  # If another robot within radius, use avoid_obst with the position of the other robot
-        [v, omega] = bot.avoid_obst(other_robotX)
+    if min_distance < skirt_r * 2:  # If another robot within radius, use avoid with the position of the other robot
+        [v, omega] = bot.avoid(other_robotX)
     return [v, omega]
