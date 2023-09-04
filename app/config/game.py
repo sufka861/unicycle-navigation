@@ -11,7 +11,7 @@ class Game:
         self.frames = 0
         # Shared goal position
         self.goalX = np.array(goalX)
-        # Create and initialize robots
+        # Overall game data
         self.data = {"screen": screen,
                      "goalX": self.goalX,
                      "vmax": vmax,
