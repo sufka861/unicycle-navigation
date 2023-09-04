@@ -16,3 +16,6 @@ vmax = 0.5
 gtg_scaling = 0.0001
 K_p = 0.01
 ao_scaling = 0.00005
+
+# Goal
+goalX = [600, 400]

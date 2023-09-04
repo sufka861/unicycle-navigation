@@ -4,29 +4,12 @@ from app.controllers.robot_controller import *
 
 
 def main():
-    # PyGame inits
-    pygame.init()
-    pygame.display.set_caption('Unicycle robot')
-    clock = pygame.time.Clock()
-    ticks = pygame.time.get_ticks()
-    frames = 0
-
-    # Shared goal position
-    goalX = np.array([600, 400])
-
-    # Create and initialize robots
-    data = {"screen": screen,
-            "goalX": goalX,
-            "vmax": vmax,
-            "gtg_scaling": gtg_scaling,
-            "K_p": K_p,
-            "ao_scaling": ao_scaling}
+    # Inits
+    init()
+    game = Game()
 
     # initialize robot_list
-    robot_list = create_robots(num_robots, data)
-
-    # Shared goal position
-    goalX = np.array([600, 400])
+    robot_list = create_robots(num_robots, game.data)
 
     # Create obstacles
     [radius, circ_x, circ_y] = create_circular_obsts(num_circ_obsts)
@@ -41,7 +24,7 @@ def main():
 
         # Draw robots, sensor skirts, obstacles, and goal
         for bot in robot_list:
-            bot = Robot(bot.x, bot.y, bot.phi, bot.l, bot.b, data)
+            bot = Robot(bot.x, bot.y, bot.phi, bot.l, bot.b, game.data)
             pygame.draw.circle(screen, (100, 100, 100), (int(bot.x), int(bot.y)), skirt_r, 0)  # Draw sensor skirt
             bot.show()  # Draw the robot
         draw_circular_obsts(radius, circ_x, circ_y)
@@ -55,12 +38,12 @@ def main():
             bot.update_position(v, omega)
 
         # FPS. Print if required
-        clock.tick(300)  # To limit FPS, controls the speed of the animation
-        fps = (frames * 1000) / (pygame.time.get_ticks() - ticks)  # Calculate current FPS
+        game.clock.tick(300)  # To limit FPS, controls the speed of the animation
+        fps = (game.frames * 1000) / (pygame.time.get_ticks() - game.ticks)  # Calculate current FPS
 
         # Update PyGame display
         pygame.display.flip()
-        frames += 1
+        game.frames += 1
 
 
 if __name__ == '__main__':
