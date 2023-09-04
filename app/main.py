@@ -1,6 +1,6 @@
 from pygame.locals import *
-from circular_obsts import *
-from robot_controller import *
+from app.entities.circular_obsts import *
+from app.controllers.robot_controller import *
 
 screen = pygame.display.set_mode([screen_width, screen_height], DOUBLEBUF)
 

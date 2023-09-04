@@ -10,7 +10,7 @@ Dependencies: `python3`, `pygame`, `numpy`
 
 A few trials are shown below:
 
-![Paranoid Android](./resources/paranoid-android.gif)
+![Paranoid Android](../resources/paranoid-android.gif)
 
 ## Introduction
 
@@ -64,7 +64,7 @@ The navigation framework is general, in the sense that the goal position can be 
 - Implementation of a **follow-wall** behaviour (induced sliding mode controller) so that the robot can navigate around non-convex obstacles
 - Implementation of a **hybrid automata** to switch between the three behaviours
 
-![Hybrid Automata](./resources/hybrid-automata.png)
+![Hybrid Automata](../resources/hybrid-automata.png)
 
 - Improving the avoid obstacle behaviour - instead of a paranoid robot, could weigh and add "obstacle vectors" depending on each obstacle's distance and the robot's direction of travel
 - Obstacles placement sanity checks - so that obstacles are not placed on top of the goal or the initial position of the robot or they do not enclose the goal entirely

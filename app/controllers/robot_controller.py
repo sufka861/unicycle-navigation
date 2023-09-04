@@ -1,6 +1,6 @@
 import random
-from config import *
-from robot import *
+from app.config.config import *
+from app.entities.robot import *
 
 
 def create_robots(num_robots, data):

@@ -1,7 +1,7 @@
 import pygame
 import random
-from config import *
-from main import screen
+from app.config.config import *
+from app.main import screen
 
 
 def create_circular_obsts(num):
