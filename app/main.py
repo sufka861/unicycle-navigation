@@ -1,4 +1,5 @@
 from app.config.init import *
+from app.config.game import Game
 from app.entities.circular_obsts import *
 from app.controllers.robot_controller import *
 
@@ -8,7 +9,7 @@ def main():
     init()
     game = Game()
 
-    # initialize robot_list
+    # Initialize robot_list
     robot_list = create_robots(num_robots, game.data)
 
     # Create obstacles
