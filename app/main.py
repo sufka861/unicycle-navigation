@@ -1,8 +1,6 @@
-from pygame.locals import *
+from app.config.init import *
 from app.entities.circular_obsts import *
 from app.controllers.robot_controller import *
-
-screen = pygame.display.set_mode([screen_width, screen_height], DOUBLEBUF)
 
 
 def main():
