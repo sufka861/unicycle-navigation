@@ -23,22 +23,18 @@ class Robot:
 
     def go_to_goal(self):
         e = self.data["goalX"] - self.X  # error in position
-        K = self.data["vmax"] * (1 - np.exp(- self.data["gtg_scaling"] * np.linalg.norm(e) ** 2)) / np.linalg.norm(
-            e)  # Scaling for velocity
+        K = self.data["vmax"] * (1 - np.exp(- self.data["gtg_scaling"] * np.linalg.norm(e) ** 2)) / np.linalg.norm(e)  # Scaling for velocity
         v = np.linalg.norm(K * e)  # Velocity decreases as bot gets closer to goal
         phi_d = math.atan2(e[1], e[0])  # Desired heading
-        omega = self.data["K_p"] * math.atan2(math.sin(phi_d - self.phi), math.cos(
-            phi_d - self.phi))  # Only P part of a PID controller to give omega as per desired heading
+        omega = self.data["K_p"] * math.atan2(math.sin(phi_d - self.phi), math.cos(phi_d - self.phi))  # Only P part of a PID controller to give omega as per desired heading
         return [v, omega]
 
     def avoid(self, obstX):
         e = obstX - self.X  # error in position
-        K = self.data["vmax"] * (1 - np.exp(- self.data["ao_scaling"] * np.linalg.norm(e) ** 2)) / np.linalg.norm(
-            e)  # Scaling for velocity
+        K = self.data["vmax"] * (1 - np.exp(- self.data["ao_scaling"] * np.linalg.norm(e) ** 2)) / np.linalg.norm(e)  # Scaling for velocity
         v = np.linalg.norm(K * e)  # Velocity decreases as bot gets closer to obstacle
         phi_d = -math.atan2(e[1], e[0])  # Desired heading
-        omega = self.data["K_p"] * math.atan2(math.sin(phi_d - self.phi), math.cos(
-            phi_d - self.phi))  # Only P part of a PID controller to give omega as per desired heading
+        omega = self.data["K_p"] * math.atan2(math.sin(phi_d - self.phi), math.cos(phi_d - self.phi))  # Only P part of a PID controller to give omega as per desired heading
         return [v, omega]
 
     def update_position(self, v, omega):

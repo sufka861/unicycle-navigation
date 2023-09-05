@@ -9,10 +9,10 @@ def main():
     init()
     game = Game()
 
-    # Initialize robot_list
+    # Create robot_list
     robot_list = create_robots(num_robots, game.data)
 
-    # Create obstacles
+    # Create obstacle list
     obstacle_list = create_circular_obsts(num_circ_obsts)
 
     # PyGame loop
@@ -35,7 +35,6 @@ def main():
         # Check if obstacles are in sensor skirts of any robots
         for bot in robot_list:
             [v, omega] = calculate_movement(bot, robot_list, obstacle_list)
-
             # Update robot position and orientation as per control input
             bot.update_position(v, omega)
 
