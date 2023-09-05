@@ -37,3 +37,29 @@ If there aren't any, the robot generates its `v, omega` from `go_to_goal()`.
 If there is an obstacle close by, the values will be generated from `avoid(self, obstX)`.
 Last, the robot will calculate its distance from other robots. If another robots radius is within its own radius, the robot will use the 
 same `avoid(self, obstX)` but now with the other robot as `obstX` and calculate the same 'paranoid' `v, omega`.
+This means that the priority of the robot is to avoid other robots. More specifically the priority order is:
+1. avoid other robots
+2. avoid obstacles
+3. go to goal
+
+## System architecture and structure
+In the initial system, the entire code except for the `Robot` class was inside the `main.py` file.
+In this V2 the system is divided into multiple parts with independent functionality.
+- `app` Directory - Holds all of the app code.
+  - `main.py` contains the "View" control of the system. All logic, calculations and classes were removed. The file contains
+  only initializations and calls to functions, and is in charge of manipulating the GUI of the system.
+  - `entities` Directory - The directory holds the classes and entities of the system
+    - `robot.py` - The Robot class, with and addition of `update_position(self, v, omega)`.
+    - `circular_obsts.py` - Same as before but in its own separate file.
+  - `config` Directory - Global variables and configuration aspects of the system. 
+    - `config.py` - Provides the ability to change variables in the system out of one single place.
+    - `init.py` - Initialization of the `pygame` package.
+    - `game.py` - Holds the Game class which contains data on the GUI and the game objects.
+  - `controllers` Directory - Controllers hold the logic calculation and manipulation of the objects.
+    - `robot_controller.py` - Manipulation and calculations on the Robot object can be done through the methods in the controller.
+- `docs` Directory - System documentation.
+  - `LICENSE`
+  - `README.md`
+  - `V2_README.md`
+- `resources` Directory - Same as before.
+
