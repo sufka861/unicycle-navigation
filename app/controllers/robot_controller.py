@@ -15,13 +15,13 @@ def create_robots(num_robots, data):
     return robot_list
 
 
-def close_obst_count(bot, num_circ_obsts, circ_x, circ_y, radius):
+def close_obst_count(bot, num_circ_obsts, obstacle_list):
     close_obst = []
     dist = []
     for i in range(num_circ_obsts):
-        distance = math.sqrt((circ_x[i] - bot.x) ** 2 + (circ_y[i] - bot.y) ** 2)
-        if distance <= (skirt_r + radius[i]):
-            close_obst.append([circ_x[i], circ_y[i], radius[i]])
+        distance = math.sqrt((obstacle_list[i].circ_x - bot.x) ** 2 + (obstacle_list[i].circ_y - bot.y) ** 2)
+        if distance <= (skirt_r + obstacle_list[i].radius):
+            close_obst.append([obstacle_list[i].circ_x, obstacle_list[i].circ_y, obstacle_list[i].radius])
             dist.append(distance)
     return close_obst, dist
 
@@ -38,14 +38,14 @@ def min_distance_from_other_robot(bot, robot_list):
     return min_distance, other_robotX
 
 
-def calculate_movement(bot, robot_list, circ_x, circ_y, radius):
+def calculate_movement(bot, robot_list, obstacle_list):
     # Go to gaol while avoiding obstacles
-    [close_obst, dist] = close_obst_count(bot, num_circ_obsts, circ_x, circ_y, radius)
+    [close_obst, dist] = close_obst_count(bot, num_circ_obsts, obstacle_list)
     if len(close_obst) == 0:  # No obstacle in sensor skirt
         [v, omega] = bot.go_to_goal()  # Output from controller go_to_goal()
     else:
         closest_obj = dist.index(min(dist))  # Index of the closest object
-        obstX = np.array([circ_x[closest_obj], circ_y[closest_obj]])
+        obstX = np.array([obstacle_list[closest_obj].circ_x, obstacle_list[closest_obj].circ_y])
         [v, omega] = bot.avoid(obstX)
 
     # Avoid other robots

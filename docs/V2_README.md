@@ -29,6 +29,8 @@ The phi degree is generated using the `random.uniform(self, a:float, b:float)` b
 
 ## Up to 3 obstacles
 The number of obstacles is configured in the `app.config.config.py` file as `num_circ_obsts = 3`.
+In this new version there is a new `Circular_Obstacle` class and in the `main.py` file a `obstacle_list` is maintained and passed down to the functions
+that need access to the `Circular_Obstacle` data.
 
 ## Robots should avoid colliding with each other
 The logic of the robots movement is performed in the function `calculate_movement(bot, robot_list, circ_x, circ_y, radius)` inside the `app.controllers.robot_controller.py`.
@@ -49,14 +51,16 @@ In this V2 the system is divided into multiple parts with independent functional
   - `main.py` contains the "View" control of the system. All logic, calculations and classes were removed. The file contains
   only initializations and calls to functions, and is in charge of manipulating the GUI of the system.
   - `entities` Directory - The directory holds the classes and entities of the system
-    - `robot.py` - The Robot class, with and addition of `update_position(self, v, omega)`.
-    - `circular_obsts.py` - Same as before but in its own separate file.
+    - `robot.py` - The `Robot` class, with and addition of `update_position(self, v, omega)`.
+    - `circular_obsts.py` - A new `Circular_Obstacle` class to better maintain the obstacles to allow future manipulation for different obstacles and their use.
   - `config` Directory - Global variables and configuration aspects of the system. 
     - `config.py` - Provides the ability to change variables in the system out of one single place.
     - `init.py` - Initialization of the `pygame` package.
     - `game.py` - Holds the Game class which contains data on the GUI and the game objects.
   - `controllers` Directory - Controllers hold the logic calculation and manipulation of the objects.
     - `robot_controller.py` - Manipulation and calculations on the Robot object can be done through the methods in the controller.
+    - `circular_obst_controller.py` - Controller file with the methods used to control the obstacles. In this case used to create
+    `obstacle_list` that contains all of the `Circular_Obstacle` objects.
 - `docs` Directory - System documentation.
   - `LICENSE`
   - `README.md`

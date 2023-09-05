@@ -1,6 +1,6 @@
 from app.config.init import *
 from app.config.game import Game
-from app.entities.circular_obsts import *
+from app.controllers.circular_obst_controller import *
 from app.controllers.robot_controller import *
 
 
@@ -13,7 +13,7 @@ def main():
     robot_list = create_robots(num_robots, game.data)
 
     # Create obstacles
-    [radius, circ_x, circ_y] = create_circular_obsts(num_circ_obsts)
+    obstacle_list = create_circular_obsts(num_circ_obsts)
 
     # PyGame loop
     while True:
@@ -28,12 +28,13 @@ def main():
             bot = Robot(bot.x, bot.y, bot.phi, bot.l, bot.b, game.data)
             pygame.draw.circle(screen, (100, 100, 100), (int(bot.x), int(bot.y)), skirt_r, 0)  # Draw sensor skirt
             bot.show()  # Draw the robot
-        draw_circular_obsts(radius, circ_x, circ_y)
+        for obst in obstacle_list:
+            obst.draw_circular_obsts()
         pygame.draw.circle(screen, (0, 255, 0), goalX, 8, 0)  # Draw goal
 
         # Check if obstacles are in sensor skirts of any robots
         for bot in robot_list:
-            [v, omega] = calculate_movement(bot, robot_list, circ_x, circ_y, radius)
+            [v, omega] = calculate_movement(bot, robot_list, obstacle_list)
 
             # Update robot position and orientation as per control input
             bot.update_position(v, omega)
