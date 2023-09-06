@@ -8,7 +8,7 @@ obst_min_radius = 10
 obst_max_radius = 50
 
 # Robot
-num_robots = 3
+num_robots = 1
 skirt_r = 50  # Sensor skirt radius
 
 # Robot Data

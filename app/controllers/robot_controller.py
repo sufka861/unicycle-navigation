@@ -29,6 +29,8 @@ def close_obst_count(bot, num_circ_obsts, obstacle_list):
 def min_distance_from_other_robot(bot, robot_list):
     # Avoid other robots
     min_distance = float('inf')  # Initialize to positive infinity
+    if len(robot_list) <= 1:
+        return min_distance, bot
     for other_robot in robot_list:
         if other_robot is not bot:  # Avoid checking against itself
             distance = math.sqrt((other_robot.x - bot.x) ** 2 + (other_robot.y - bot.y) ** 2)
